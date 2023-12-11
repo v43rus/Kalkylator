@@ -1,0 +1,65 @@
+Individuell inlämningsuppgift
+Miniräknare (IG/G/VG)
+Den här uppgiften görs individuellt och går ut på att du ska skapa en miniräknare.
+ 
+Uppgiften
+Skapa en miniräknare som tar tal och matematiska operator från användare via konsol eller ett grafiskt interface. Varje resultat ska sparas i en lista. Kopiera pseudo koden som innehåller instruktioner, klistra in i ditt projekt och följa den under kodande. Analysera och utvärdera gränssnitt, designmönster och lösningar i din kod och föreslå vidare utökningar.
+
+Pseudo kod
+// Välkomnande meddelande
+// En lista för att spara historik för räkningar
+// Användaren matar in tal och matematiska operation
+// OBS! Användaren måsta mata in ett tal för att kunna ta sig vidare i programmet!
+// Ifall användaren skulle dela med 0 visa Ogiltig inmatning!
+// Lägga resultat till listan
+// Visa resultat
+// Fråga användaren om den vill visa tidigare resultat.
+// Visa tidigare resultat
+// Fråga användaren om den vill avsluta eller fortsätta.
+
+GIT
+Skapa en GIT repository, och använda sig av GIT för versionshantering i denna projekt.  
+
+Checklista
+Input/output
+Lista med historik
+Kontrollstrukturer
+Välja lämpligt designmönster
+Källkodshantering med GIT
+
+Betygsättning
+Den här inlämningen kontrollerar följande läranderesultat
+
+Kunskaper om/i:
+
+1.       Programmering 
+2.       Loopar, if-satser, villkor 
+3.       Listor och arrayer 
+4.       Funktioner 
+5.       Lagringsstruktur, kontrollstruktur och algoritmer 
+6.       Designmönster 
+7.       Tekniska instruktioner och manualläsning även på engelska
+
+Färdigheter i att:
+
+8.     Konstruera enkla program innehållande kontrollstruktur 
+9.     Hantera dataflöde som sker genom gränssnitt 
+10.   Använda versionshantering 
+11.   Använda samlingsklasser
+
+Kompetenser för att:
+
+12.   Värdera samlingsklasser och ta ställning till när något blir omodernt samt föreslå lösning
+
+
+Godkänt (G)
+Den studerande har visat läranderesultat kopplat till inlämningsuppgift
+
+Väl godkänt (VG) 
+Den studerande har visat läranderesultat kopplat till inlämningsuppgift. Den studerande kan dessutom: 
+• självständigt och med hög kvalité analysera och utvärdera gränssnitt, designmönster och lösningar.
+
+Efter ordinarie tillfälle har den studerande rätt till ytterligare två omprov eller kompletteringar inom två månader. 
+
+
+Analys och utvärdering av lösning lämnas in som en rapport (i fil format) tillsammans med länken till Git repo där lösning är uppladdad.
