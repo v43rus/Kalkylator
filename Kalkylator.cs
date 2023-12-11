@@ -15,12 +15,30 @@ namespace Kalkylator
         public Kalkylator()
         {
             InitializeComponent();
-            Main();
+
+            RunCalc(); 
         }
 
-        private void Main()
+        private void RunCalc()
         {
-            inputBox.Text = "Bnajs";
+            consoleLog.Text = "Hej och välkommen till kalkylatorn!";
+
+            List<string> tidigareKalkuleringar = new List<string>();
+
+            float num1 = 0;
+            float num2 = 0;
+            char sign = ' ';
+
+            // Välkomnande meddelande
+            // En lista för att spara historik för räkningar
+            // Användaren matar in tal och matematiska operation
+            // OBS! Användaren måsta mata in ett tal för att kunna ta sig vidare i programmet!
+            // Ifall användaren skulle dela med 0 visa Ogiltig inmatning!
+            // Lägga resultat till listan
+            // Visa resultat
+            // Fråga användaren om den vill visa tidigare resultat.
+            // Visa tidigare resultat
+            // Fråga användaren om den vill avsluta eller fortsätta.
         }
 
         private void plusButton_Click(object sender, EventArgs e)
@@ -118,6 +136,11 @@ namespace Kalkylator
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void consoleLog_TextChanged(object sender, EventArgs e)
         {
 
         }

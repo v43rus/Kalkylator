@@ -67,13 +67,15 @@
             // consoleLog
             // 
             this.consoleLog.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.consoleLog.Font = new System.Drawing.Font("Roboto Slab", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consoleLog.Font = new System.Drawing.Font("Roboto Slab", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consoleLog.ForeColor = System.Drawing.SystemColors.Window;
             this.consoleLog.Location = new System.Drawing.Point(12, 344);
             this.consoleLog.Multiline = true;
             this.consoleLog.Name = "consoleLog";
             this.consoleLog.Size = new System.Drawing.Size(315, 68);
             this.consoleLog.TabIndex = 1;
+            this.consoleLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.consoleLog.TextChanged += new System.EventHandler(this.consoleLog_TextChanged);
             // 
             // clearButton
             // 
