@@ -72,10 +72,10 @@
             this.consoleLog.Location = new System.Drawing.Point(12, 344);
             this.consoleLog.Multiline = true;
             this.consoleLog.Name = "consoleLog";
+            this.consoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.consoleLog.Size = new System.Drawing.Size(315, 68);
             this.consoleLog.TabIndex = 1;
             this.consoleLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.consoleLog.TextChanged += new System.EventHandler(this.consoleLog_TextChanged);
             // 
             // clearButton
             // 
@@ -105,7 +105,7 @@
             // 
             // historyButton
             // 
-            this.historyButton.BackColor = System.Drawing.Color.Fuchsia;
+            this.historyButton.BackColor = System.Drawing.Color.BlueViolet;
             this.historyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.historyButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.historyButton.Location = new System.Drawing.Point(127, 88);
@@ -263,7 +263,7 @@
             // 
             // commaButton
             // 
-            this.commaButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.commaButton.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.commaButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.commaButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.commaButton.Location = new System.Drawing.Point(164, 284);
@@ -315,8 +315,7 @@
             // 
             // equalsButton
             // 
-            this.equalsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.equalsButton.Enabled = false;
+            this.equalsButton.BackColor = System.Drawing.Color.MediumVioletRed;
             this.equalsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.equalsButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.equalsButton.Location = new System.Drawing.Point(238, 284);
