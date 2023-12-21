@@ -347,6 +347,13 @@ namespace Kalkylator
 
         private void inputBox_TextChanged(object sender, EventArgs e)
         {
+            // If the user inputs anything else than digits or commas it clears the inputbox
+            for (int i = 0; i < inputBox.Text.Length; i++)
+            {
+                if (!Char.IsDigit(inputBox.Text[i]) && inputBox.Text[i] != '.')
+                    inputBox.Clear();
+            }
+
             // Checks if in first phase and that the inputbox isn't empty
             if (firstInput && inputBox.Text != "")
             {
