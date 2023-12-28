@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,16 +25,12 @@ namespace Kalkylator
         bool showsResult = false;
         bool showsHistory = false;
 
-        // Bool to check if comma exists
-        bool commaExists = false;
-
         // A list that contains previous calculations
         List<string> history = new List<string>();
 
         public Kalkylator()
         {
             InitializeComponent();
-
             RunCalc();
         }
 
@@ -46,98 +43,82 @@ namespace Kalkylator
         private void plusButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
+            if (showsHistory && showsResult)
+                return;
+            // Checks to make sure calculation is valid and if it's the first variable
+            if (firstInput && !showsResult && num1 != 0)
             {
-                // Checks to make sure calculation is valid and if it's the first variable
-                if (firstInput && !showsResult && num1 != 0)
-                {
-                    sign = '+';
-                    updateCurrentCalculation("new");
-                }
-                // Continues calculation if there already is a first variable declared
-                else if (secondInput)
-                {
-                    updateCurrentCalculation("plus");
-                    sign = '+';
-                }
+                sign = '+';
+                UpdateCurrentCalculation("new");
             }
+            // Continues calculation if there already is a first variable declared
+            else if (secondInput)
+                UpdateCurrentCalculation("plus");
         }
+
         private void minusButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
+            if (showsHistory && showsResult)
+                return;
+            // Checks to make sure calculation is valid and if it's the first variable
+            if (firstInput && !showsResult && num1 != 0)
             {
-                // Checks to make sure calculation is valid and if it's the first variable
-                if (firstInput && !showsResult && num1 != 0)
-                {
-                    sign = '-';
-                    updateCurrentCalculation("new");
-                }
-                // Continues calculation if there already is a first variable declared
-                else if (secondInput)
-                {
-                    updateCurrentCalculation("minus");
-                }
+                sign = '-';
+                UpdateCurrentCalculation("new");
             }
+            // Continues calculation if there already is a first variable declared
+            else if (secondInput)
+                UpdateCurrentCalculation("minus");
         }
+
         private void multiplyButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
+            if (showsHistory && showsResult)
+                return;
+            // Checks to make sure calculation is valid and if it's the first variable
+            if (firstInput && !showsResult && num1 != 0)
             {
-                // Checks to make sure calculation is valid and if it's the first variable
-                if (firstInput && !showsResult && num1 != 0)
-                {
-                    sign = '*';
-                    updateCurrentCalculation("new");
-                }
-                // Continues calculation if there already is a first variable declared
-                else if (secondInput)
-                {
-                    updateCurrentCalculation("multiply");
-                }
+                sign = '*';
+                UpdateCurrentCalculation("new");
             }
+            // Continues calculation if there already is a first variable declared
+            else if (secondInput)
+                UpdateCurrentCalculation("multiply");
         }
+
         private void divideButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
+            if (showsHistory && showsResult)
+                return;
+            // Checks to make sure calculation is valid and if it's the first variable
+            if (firstInput && !showsResult && num1 != 0)
             {
-                // Checks to make sure calculation is valid and if it's the first variable
-                if (firstInput && !showsResult && num1 != 0)
-                {
-                    sign = '/';
-                    updateCurrentCalculation("new");
-                }
-                // Continues calculation if there already is a first variable declared
-                else if (secondInput)
-                {
-                    updateCurrentCalculation("divide");
-                }
+                sign = '/';
+                UpdateCurrentCalculation("new");
             }
+            // Continues calculation if there already is a first variable declared
+            else if (secondInput)
+                UpdateCurrentCalculation("divide");
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
-            {
-                // Checks to see if there is a second variable that is valid else it won't calculate
-                if (secondInput && inputBox.Text != "")
-                {
-                    calculate();
-                }
-            }
+            if (showsHistory && showsResult)
+                return;
+            // Checks to see if there is a second variable that is valid else it won't calculate
+            if (secondInput && inputBox.Text != "")
+                Calculate();
         }
 
-        private void updateCurrentCalculation(string input)
+        private void UpdateCurrentCalculation(string input)
         {
             // Updates current calculation text after operand has been clicked and there is a valid first variable
             if (input == "new")
-            {
                 currentCalculation.Text = $"{num1} {sign}";
-            }
-
 
             // Is used when doing further calculatiions on the first numerical
             if (inputBox.Text != "")
@@ -146,7 +127,7 @@ namespace Kalkylator
                 {
                     // Calculates based on previous sign value and assigns new value based upon which button is clicked
                     // Also Updates the current calculation text
-                    makeAdditionalCalculations();
+                    MakeAdditionalCalculations();
                     sign = '+';
                     currentCalculation.Text = $"{num1} {sign}";
                 }
@@ -154,7 +135,7 @@ namespace Kalkylator
                 {
                     // Calculates based on previous sign value and assigns new value based upon which button is clicked
                     // Also Updates the current calculation text
-                    makeAdditionalCalculations();
+                    MakeAdditionalCalculations();
                     sign = '-';
                     currentCalculation.Text = $"{num1} {sign}";
                 }
@@ -162,7 +143,7 @@ namespace Kalkylator
                 {
                     // Calculates based on previous sign value and assigns new value based upon which button is clicked
                     // Also Updates the current calculation text
-                    makeAdditionalCalculations();
+                    MakeAdditionalCalculations();
                     sign = '*';
                     currentCalculation.Text = $"{num1} {sign}";
                 }
@@ -170,23 +151,21 @@ namespace Kalkylator
                 {
                     // Calculates based on previous sign value and assigns new value based upon which button is clicked
                     // Also Updates the current calculation text
-                    makeAdditionalCalculations();
+                    MakeAdditionalCalculations();
                     sign = '/';
                     currentCalculation.Text = $"{num1} {sign}";
                 }
             }
-
             // Resets the textbox and continues Second Input phase
             inputBox.Text = "";
-            commaExists = false;
             firstInput = false;
             secondInput = true;
         }
 
-        private void makeAdditionalCalculations()
+        private void MakeAdditionalCalculations()
         {
             // Checks to make sure what calculation to make before assigning the new sign value in updateCurrentCalculation()
-            if(sign == '+')
+            if (sign == '+')
             {
                 num1 += num2;
             }
@@ -204,7 +183,7 @@ namespace Kalkylator
             }
         }
 
-        private void calculate()
+        private void Calculate()
         {
             // Finishes the calculation and assigns a result
             switch (sign)
@@ -224,7 +203,7 @@ namespace Kalkylator
                 default:
                     break;
             }
-            
+
             // Checks for calculation and adds to history
             // Also showsResult which disables further operations
             if (result.ToString() == "\u221E" || result.ToString() == "NaN")
@@ -264,7 +243,6 @@ namespace Kalkylator
                 sign = ' ';
                 result = 0;
 
-                commaExists = false;
                 firstInput = true;
                 secondInput = false;
                 showsResult = false;
@@ -274,7 +252,7 @@ namespace Kalkylator
                 currentCalculation.Text = "";
                 consoleLog.Text = "Hej och välkommen till kalkylatorn!";
 
-                goButtons();
+                GreenButtons();
             }
             else if (input == "soft")
             {
@@ -284,7 +262,6 @@ namespace Kalkylator
                 sign = ' ';
                 result = 0;
 
-                commaExists = false;
                 firstInput = true;
                 secondInput = false;
                 showsResult = false;
@@ -297,23 +274,15 @@ namespace Kalkylator
         private void commaButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (!showsHistory && !showsResult)
-            {
-                // Another check that disables inputting comma as the first sign
-                if (!commaExists && inputBox.Text == "")
-                {
-                    inputBox.Text += "0.";
-                    commaExists = true;
-                }
-                // Makes sure there can only be one comma
-                else if (!commaExists)
-                {
-                    inputBox.Text += ".";
-                    commaExists = true;
-                }
-            }
+            if (showsHistory || showsResult)
+                return;
+            // Another check that disables inputting comma as the first sign
+            if (inputBox.Text == "")
+                inputBox.Text += "0.";
+            // Makes sure there can only be one comma
+            else if (!inputBox.Text.Contains('.'))
+                inputBox.Text += ".";
         }
-
 
         private void historyButton_Click(object sender, EventArgs e)
         {
@@ -323,7 +292,7 @@ namespace Kalkylator
             if (!showsHistory)
             {
                 // Shows history
-                greyButtons();
+                GreyButtons();
                 consoleLog.Clear();
                 consoleLog.Text = "Press History again to continue calculating" + Environment.NewLine;
                 for (int i = 0; i < history.Count; i++)
@@ -335,7 +304,7 @@ namespace Kalkylator
             else
             {
                 // Hides history
-                goButtons();
+                GreenButtons();
                 consoleLog.Clear();
                 consoleLog.Text = "Hej och välkommen till kalkylatorn!";
                 showsHistory = false;
@@ -353,19 +322,14 @@ namespace Kalkylator
                 if (!Char.IsDigit(inputBox.Text[i]) && inputBox.Text[i] != '.')
                     inputBox.Clear();
             }
-
             // Checks if in first phase and that the inputbox isn't empty
             if (firstInput && inputBox.Text != "")
-            {
                 // Gets number 1
                 num1 = float.Parse(inputBox.Text);
-            }
             // Checks if in second phase and that the inputbox isn't empty
             else if (secondInput && inputBox.Text != "")
-            {
                 // Gets number 1
                 num2 = float.Parse(inputBox.Text);
-            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -375,10 +339,7 @@ namespace Kalkylator
             {
                 // Clears inputBox if there is text in it & calculator isn't showing results
                 if (inputBox.Text != "" && !showsResult)
-                {
-                    inputBox.Text = "";
-                    commaExists = false;
-                }
+                    inputBox.Clear();
                 // Does a soft reset when calculator is showing reuslts
                 else if (showsResult)
                     Reset("soft");
@@ -388,186 +349,170 @@ namespace Kalkylator
         private void zeroButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            // Also makes sure you can't input a zero if 
-            if (!showsHistory)
+            if (showsHistory)
+                return;
+            if (!showsResult)
             {
-                if (!showsResult)
-                {
-                    // Check to make sure you don't input 0 as first sign (use comma instead if you want to us 0. value)
-                    if (inputBox.Text != "")
-                    {
-                        inputBox.Text += "0";
-                    }
-                }
+                // Check to make sure you don't input 0 as first sign (use comma instead if you want to us 0. value)
+                if (inputBox.Text != "")
+                    inputBox.Text += "0";
+            }
 
-                if (showsResult)
-                {
-                    Reset("soft");
-                    if (inputBox.Text != "")
-                    {
-                        inputBox.Text += "0";
-                    }
-                }
+            if (showsResult)
+            {
+                Reset("soft");
+                if (inputBox.Text != "")
+                    inputBox.Text += "0";
             }
         }
 
         private void oneButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "1";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "1";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "1";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "1";
             }
         }
 
         private void twoButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "2";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "2";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "2";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "2";
             }
         }
 
         private void threeButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "3";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "3";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "3";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "3";
             }
         }
 
         private void fourButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "4";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "4";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "4";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "4";
             }
         }
 
         private void fiveButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "5";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "5";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "5";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "5";
             }
         }
 
         private void sixButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "6";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "6";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "6";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "6";
             }
         }
 
         private void sevenButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "7";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "7";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "7";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "7";
             }
         }
 
         private void eightButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "8";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "8";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "8";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "8";
             }
         }
 
         private void nineButton_Click(object sender, EventArgs e)
         {
             // Checks if user is viewing history before inputting number
-            if (!showsHistory)
-            {
-                if (!showsResult)
-                    inputBox.Text += "9";
+            if (showsHistory)
+                return;
+            if (!showsResult)
+                inputBox.Text += "9";
 
-                // Starts a new calculation if the calculator is showing result
-                if (showsResult)
-                {
-                    Reset("soft");
-                    inputBox.Text += "9";
-                }
+            // Starts a new calculation if the calculator is showing result
+            if (showsResult)
+            {
+                Reset("soft");
+                inputBox.Text += "9";
             }
         }
 
         // Applies visual elements to let you know you can't use certain buttons while showing history
-        private void greyButtons()
+        private void GreyButtons()
         {
-            
             clearButton.BackColor = SystemColors.ControlDarkDark;
             divideButton.BackColor = SystemColors.ControlDarkDark;
             multiplyButton.BackColor = SystemColors.ControlDarkDark;
@@ -585,14 +530,12 @@ namespace Kalkylator
             sevenButton.BackColor = SystemColors.ControlDarkDark;
             eightButton.BackColor = SystemColors.ControlDarkDark;
             nineButton.BackColor = SystemColors.ControlDarkDark;
-
             historyButton.BackColor = Color.Green;
         }
 
         // Reverts visual elements to default styling when not showing history
-        private void goButtons()
+        private void GreenButtons()
         {
-            
             clearButton.BackColor = Color.Fuchsia;
             divideButton.BackColor = Color.Blue;
             multiplyButton.BackColor = Color.Blue;
@@ -610,7 +553,6 @@ namespace Kalkylator
             sevenButton.BackColor = Color.Green;
             eightButton.BackColor = Color.Green;
             nineButton.BackColor = Color.Green;
-
             historyButton.BackColor = Color.BlueViolet;
         }
     }

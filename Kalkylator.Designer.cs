@@ -72,6 +72,7 @@
             this.consoleLog.Location = new System.Drawing.Point(12, 344);
             this.consoleLog.Multiline = true;
             this.consoleLog.Name = "consoleLog";
+            this.consoleLog.ReadOnly = true;
             this.consoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.consoleLog.Size = new System.Drawing.Size(315, 68);
             this.consoleLog.TabIndex = 1;
