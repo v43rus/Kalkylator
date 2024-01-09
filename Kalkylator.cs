@@ -385,11 +385,8 @@ namespace Kalkylator
                 return;
             if (!showsResult)
             {
-<<<<<<< HEAD
                 // Check to make sure you don't input 0 as first sign (use comma instead if you want to us 0. value)
-=======
                 // Check to make sure you don't input 0 as first sign (use comma instead if you want to use 0. value)
->>>>>>> 82c39ced2f4f73f467a4e43de9a94fc99168ae1e
                 if (inputBox.Text == "")
                     inputBox.Text += "0";
                 else if (inputBox.Text == "0")
@@ -401,16 +398,13 @@ namespace Kalkylator
             if (showsResult)
             {
                 Reset("soft");
-<<<<<<< HEAD
                 inputBox.Text += "0";
-=======
                 if (inputBox.Text == "")
                     inputBox.Text += "0";
                 else if (inputBox.Text == "0")
                     return;
                 else
                     inputBox.Text += "0";
->>>>>>> 82c39ced2f4f73f467a4e43de9a94fc99168ae1e
             }
         }
 
