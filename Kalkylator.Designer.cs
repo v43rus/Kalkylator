@@ -59,6 +59,7 @@
             this.inputBox.ForeColor = System.Drawing.SystemColors.Window;
             this.inputBox.Location = new System.Drawing.Point(12, 12);
             this.inputBox.Name = "inputBox";
+            this.inputBox.ReadOnly = true;
             this.inputBox.Size = new System.Drawing.Size(315, 35);
             this.inputBox.TabIndex = 0;
             this.inputBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -271,7 +272,7 @@
             this.commaButton.Name = "commaButton";
             this.commaButton.Size = new System.Drawing.Size(68, 43);
             this.commaButton.TabIndex = 17;
-            this.commaButton.Text = ".";
+            this.commaButton.Text = ",";
             this.commaButton.UseVisualStyleBackColor = false;
             this.commaButton.Click += new System.EventHandler(this.commaButton_Click);
             // 

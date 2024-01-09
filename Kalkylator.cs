@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,7 +47,7 @@ namespace Kalkylator
             if (showsHistory && showsResult)
                 return;
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '+';
                 UpdateCurrentCalculation("new");
@@ -62,7 +63,7 @@ namespace Kalkylator
             if (showsHistory && showsResult)
                 return;
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '-';
                 UpdateCurrentCalculation("new");
@@ -78,7 +79,7 @@ namespace Kalkylator
             if (showsHistory && showsResult)
                 return;
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '*';
                 UpdateCurrentCalculation("new");
@@ -94,7 +95,7 @@ namespace Kalkylator
             if (showsHistory && showsResult)
                 return;
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '/';
                 UpdateCurrentCalculation("new");
@@ -278,10 +279,10 @@ namespace Kalkylator
                 return;
             // Another check that disables inputting comma as the first sign
             if (inputBox.Text == "")
-                inputBox.Text += "0.";
+                inputBox.Text += "0,";
             // Makes sure there can only be one comma
-            else if (!inputBox.Text.Contains('.'))
-                inputBox.Text += ".";
+            else if (!inputBox.Text.Contains(','))
+                inputBox.Text += ",";
         }
 
         private void historyButton_Click(object sender, EventArgs e)
@@ -316,12 +317,6 @@ namespace Kalkylator
 
         private void inputBox_TextChanged(object sender, EventArgs e)
         {
-            // If the user inputs anything else than digits or commas it clears the inputbox
-            for (int i = 0; i < inputBox.Text.Length; i++)
-            {
-                if (!Char.IsDigit(inputBox.Text[i]) && inputBox.Text[i] != '.')
-                    inputBox.Clear();
-            }
             // Checks if in first phase and that the inputbox isn't empty
             if (firstInput && inputBox.Text != "")
                 // Gets number 1
@@ -353,15 +348,23 @@ namespace Kalkylator
                 return;
             if (!showsResult)
             {
-                // Check to make sure you don't input 0 as first sign (use comma instead if you want to us 0. value)
-                if (inputBox.Text != "")
+                // Check to make sure you don't input 0 as first sign (use comma instead if you want to use 0. value)
+                if (inputBox.Text == "")
+                    inputBox.Text += "0";
+                else if (inputBox.Text == "0")
+                    return;
+                else
                     inputBox.Text += "0";
             }
 
             if (showsResult)
             {
                 Reset("soft");
-                if (inputBox.Text != "")
+                if (inputBox.Text == "")
+                    inputBox.Text += "0";
+                else if (inputBox.Text == "0")
+                    return;
+                else
                     inputBox.Text += "0";
             }
         }
