@@ -73,6 +73,7 @@
             this.consoleLog.Location = new System.Drawing.Point(12, 344);
             this.consoleLog.Multiline = true;
             this.consoleLog.Name = "consoleLog";
+            this.consoleLog.ReadOnly = true;
             this.consoleLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.consoleLog.Size = new System.Drawing.Size(315, 68);
             this.consoleLog.TabIndex = 1;
@@ -335,6 +336,7 @@
             this.currentCalculation.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.currentCalculation.Location = new System.Drawing.Point(113, 58);
             this.currentCalculation.Name = "currentCalculation";
+            this.currentCalculation.ReadOnly = true;
             this.currentCalculation.Size = new System.Drawing.Size(214, 16);
             this.currentCalculation.TabIndex = 22;
             this.currentCalculation.Text = "placeholder";

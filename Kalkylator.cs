@@ -48,8 +48,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Checks to make sure calculation is valid and if it's the first variable
@@ -70,8 +69,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Checks to make sure calculation is valid and if it's the first variable
@@ -92,8 +90,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Checks to make sure calculation is valid and if it's the first variable
@@ -114,8 +111,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Checks to make sure calculation is valid and if it's the first variable
@@ -136,8 +132,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Checks to see if there is a second variable that is valid else it won't calculate
@@ -310,8 +305,7 @@ namespace Kalkylator
                 return;
             else if (showsResult)
             {
-                consoleLog.Text = "Can't do mathematic operations while showing result." +
-                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                consoleLog.Text = "Clear the window to keep making further calculations.";
                 return;
             }
             // Another check that disables inputting comma as the first sign
