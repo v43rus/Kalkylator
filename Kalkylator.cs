@@ -43,10 +43,16 @@ namespace Kalkylator
         private void plusButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory && showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '+';
                 UpdateCurrentCalculation("new");
@@ -59,10 +65,16 @@ namespace Kalkylator
         private void minusButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory && showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '-';
                 UpdateCurrentCalculation("new");
@@ -75,10 +87,16 @@ namespace Kalkylator
         private void multiplyButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory && showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '*';
                 UpdateCurrentCalculation("new");
@@ -91,10 +109,16 @@ namespace Kalkylator
         private void divideButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory && showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Checks to make sure calculation is valid and if it's the first variable
-            if (firstInput && !showsResult && num1 != 0)
+            if (firstInput && !showsResult)
             {
                 sign = '/';
                 UpdateCurrentCalculation("new");
@@ -107,8 +131,14 @@ namespace Kalkylator
         private void equalsButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory && showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Checks to see if there is a second variable that is valid else it won't calculate
             if (secondInput && inputBox.Text != "")
                 Calculate();
@@ -250,7 +280,7 @@ namespace Kalkylator
 
                 inputBox.Text = "";
                 currentCalculation.Text = "";
-                consoleLog.Text = "Hej och välkommen till kalkylatorn!";
+                consoleLog.Text = "Hello and welcome to the calculator!";
 
                 GreenButtons();
             }
@@ -267,6 +297,7 @@ namespace Kalkylator
                 showsResult = false;
 
                 inputBox.Text = "";
+                consoleLog.Text = "Hello and welcome to the calculator!";
                 currentCalculation.Clear();
             }
         }
@@ -274,14 +305,20 @@ namespace Kalkylator
         private void commaButton_Click(object sender, EventArgs e)
         {
             // Checks to make sure you can't do new operations while calculator is showing history or a result has been calculated
-            if (showsHistory || showsResult)
+            if (showsHistory)
                 return;
+            else if (showsResult)
+            {
+                consoleLog.Text = "Can't do mathematic operations while showing result." +
+                    "If you want to proceed clear the calculator or start typing on a new calculation.";
+                return;
+            }
             // Another check that disables inputting comma as the first sign
             if (inputBox.Text == "")
-                inputBox.Text += "0.";
+                inputBox.Text += "0,";
             // Makes sure there can only be one comma
-            else if (!inputBox.Text.Contains('.'))
-                inputBox.Text += ".";
+            else if (!inputBox.Text.Contains(','))
+                inputBox.Text += ",";
         }
 
         private void historyButton_Click(object sender, EventArgs e)
@@ -306,7 +343,7 @@ namespace Kalkylator
                 // Hides history
                 GreenButtons();
                 consoleLog.Clear();
-                consoleLog.Text = "Hej och välkommen till kalkylatorn!";
+                consoleLog.Text = "Hello and welcome to the calculator!";
                 showsHistory = false;
             }
 
@@ -316,12 +353,6 @@ namespace Kalkylator
 
         private void inputBox_TextChanged(object sender, EventArgs e)
         {
-            // If the user inputs anything else than digits or commas it clears the inputbox
-            for (int i = 0; i < inputBox.Text.Length; i++)
-            {
-                if (!Char.IsDigit(inputBox.Text[i]) && inputBox.Text[i] != '.')
-                    inputBox.Clear();
-            }
             // Checks if in first phase and that the inputbox isn't empty
             if (firstInput && inputBox.Text != "")
                 // Gets number 1
@@ -354,15 +385,18 @@ namespace Kalkylator
             if (!showsResult)
             {
                 // Check to make sure you don't input 0 as first sign (use comma instead if you want to us 0. value)
-                if (inputBox.Text != "")
+                if (inputBox.Text == "")
+                    inputBox.Text += "0";
+                else if (inputBox.Text == "0")
+                    return;
+                else
                     inputBox.Text += "0";
             }
 
             if (showsResult)
             {
                 Reset("soft");
-                if (inputBox.Text != "")
-                    inputBox.Text += "0";
+                inputBox.Text += "0";
             }
         }
 
