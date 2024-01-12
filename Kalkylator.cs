@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,10 +16,11 @@ namespace Kalkylator
     public partial class Kalkylator : Form
     {
         // Variables used during calculations
-        float num1 = 0;
-        float num2 = 0;
+        double num1 = 0;
+        double num2 = 0;
+        char separator;
         char sign = ' ';
-        float result = 0;
+        double result = 0;
 
         // Bools to determine what phase the program is in
         bool firstInput = false;
@@ -39,6 +41,7 @@ namespace Kalkylator
         {
             // Hard resets all values at start of calculator
             Reset("hard");
+            separator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
         }
 
         private void plusButton_Click(object sender, EventArgs e)
@@ -310,10 +313,10 @@ namespace Kalkylator
             }
             // Another check that disables inputting comma as the first sign
             if (inputBox.Text == "")
-                inputBox.Text += "0,";
+                inputBox.Text += $"0{separator}";
             // Makes sure there can only be one comma
-            else if (!inputBox.Text.Contains(','))
-                inputBox.Text += ",";
+            else if (!inputBox.Text.Contains(separator))
+                inputBox.Text += separator;
         }
 
         private void historyButton_Click(object sender, EventArgs e)
@@ -351,11 +354,11 @@ namespace Kalkylator
             // Checks if in first phase and that the inputbox isn't empty
             if (firstInput && inputBox.Text != "")
                 // Gets number 1
-                num1 = float.Parse(inputBox.Text);
+                num1 = double.Parse(inputBox.Text);
             // Checks if in second phase and that the inputbox isn't empty
             else if (secondInput && inputBox.Text != "")
                 // Gets number 1
-                num2 = float.Parse(inputBox.Text);
+                num2 = double.Parse(inputBox.Text);
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -590,6 +593,11 @@ namespace Kalkylator
             eightButton.BackColor = Color.Green;
             nineButton.BackColor = Color.Green;
             historyButton.BackColor = Color.BlueViolet;
+        }
+
+        private void currentCalculation_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

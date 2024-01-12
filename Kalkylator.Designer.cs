@@ -334,13 +334,14 @@
             this.currentCalculation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.currentCalculation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentCalculation.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.currentCalculation.Location = new System.Drawing.Point(113, 58);
+            this.currentCalculation.Location = new System.Drawing.Point(12, 58);
             this.currentCalculation.Name = "currentCalculation";
             this.currentCalculation.ReadOnly = true;
-            this.currentCalculation.Size = new System.Drawing.Size(214, 16);
+            this.currentCalculation.Size = new System.Drawing.Size(315, 16);
             this.currentCalculation.TabIndex = 22;
             this.currentCalculation.Text = "placeholder";
             this.currentCalculation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.currentCalculation.TextChanged += new System.EventHandler(this.currentCalculation_TextChanged);
             // 
             // Kalkylator
             // 
